@@ -61,7 +61,7 @@
     .stats span{color:var(--muted);font-size:15px}
     .frame{position:relative;max-width:420px;margin-inline:auto;padding:0}
     .frame::before{content:"";position:absolute;inset-block:22px -22px;inset-inline:22px -22px;background:var(--accent);border-radius:30px}
-    .frame img{position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;border-radius:30px;background:var(--card)}
+    .frame img{position:relative;display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;border-radius:30px;background:var(--card)}
     .deco{position:absolute;z-index:0;pointer-events:none;opacity:.9;animation:drift 9s ease-in-out infinite alternate}
     .cap{width:64px;height:26px;border-radius:13px;background:linear-gradient(90deg,var(--accent) 50%,#fff 50%);box-shadow:inset 0 -5px 8px rgba(0,0,0,.25),0 8px 20px rgba(245,19,62,.25)}
     .cap.k{background:linear-gradient(90deg,#34343a 50%,#6b6b73 50%)}
@@ -87,27 +87,10 @@
     h2{font-size:clamp(28px,4vw,40px);line-height:1.3;margin:0 0 28px;font-weight:700}
     .about{max-width:62ch;margin:0;color:var(--muted);font-size:19px}
 
-    .journey{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start}
-    .dates{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
-    .dates button{width:100%;text-align:start;font:inherit;font-weight:600;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:12px 22px;cursor:pointer}
-    .dates button:hover{border-color:var(--muted)}
-    .dates button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-    .stage{margin:0}
-    .stage img{display:block;width:100%;max-width:440px;aspect-ratio:3/4;object-fit:cover;object-position:50% 25%;border-radius:28px;background:var(--card);border:1px solid var(--line);transition:opacity .25s}
-    .stage img.swap{opacity:0}
-    .stage figcaption{margin-top:12px;color:var(--muted)}
-
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0;padding:0;list-style:none}
     .cards li{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
     .cards h3{margin:0 0 8px;font-size:20px}
     .cards p{margin:0;color:var(--muted)}
-    .status{display:inline-block;margin-top:14px;font-size:14px;font-weight:600;padding:2px 14px;border-radius:999px}
-    .status.now{background:var(--accent);color:var(--on-accent)}
-    .status.plan{border:1px solid var(--muted);color:var(--muted)}
-    .status.done{border:1px solid var(--accent);color:var(--accent-text)}
-    .cards a.more{display:block;margin-top:14px;font-weight:600;text-decoration:none}
-    .cards a.more:hover{text-decoration:underline}
-    .cards li .status{margin-inline-end:12px}
 
     .contacts{display:flex;flex-wrap:wrap;gap:12px;margin:0;padding:0;list-style:none}
     footer{padding:30px 0 46px;color:var(--muted);font-size:15px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
@@ -116,15 +99,12 @@
     @media (max-width:860px){
       .hero-grid{grid-template-columns:1fr;gap:44px;padding:40px 0 56px}
       .frame{max-width:340px}
-      .journey{grid-template-columns:1fr}
-      .dates{flex-direction:row;flex-wrap:wrap}
-      .dates button{width:auto}
       .cards{grid-template-columns:1fr}
       .bar{height:auto;flex-wrap:wrap;padding:12px 0}
       nav.links{order:3;width:100%;overflow-x:auto;padding-bottom:4px}
       .deco{opacity:.45}
     }
-    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.deco{animation:none}.stage img{transition:none}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.deco{animation:none}}
   </style>
 </head>
 <body>
@@ -133,8 +113,8 @@
     <a class="brand" href="#home"><span class="logo" aria-hidden="true">Rx</span><span data-i18n="name">أحمد مكاوي</span></a>
     <nav class="links" id="nav">
       <a href="#home" class="active" data-i18n="nHome">الرئيسية</a>
-      <a href="#journey" data-i18n="nJour">رحلتي</a>
-      <a href="#projects" data-i18n="nProj">المشاريع</a>
+      <a href="#about" data-i18n="nAbout">نبذة</a>
+      <a href="#learning" data-i18n="nLearn">اللي بتعلمه</a>
       <a href="#contact" data-i18n="nCont">تواصل معي</a>
     </nav>
     <div class="tools">
@@ -161,13 +141,12 @@
         <h1><span data-i18n="h1a">أهلًا، أنا</span> <em data-i18n="h1b">أحمد مكاوي</em></h1>
         <p class="lead" data-i18n="lead"></p>
         <div class="cta">
-          <a class="btn red" href="#projects" data-i18n="cta1">شوف مشاريعي</a>
-          <a class="btn dark" href="#journey" data-i18n="cta2">رحلتي</a>
+          <a class="btn red" href="#contact" data-i18n="cta1">تواصل معايا</a>
+          <a class="btn dark" href="#about" data-i18n="cta2">اعرف عني</a>
         </div>
         <ul class="stats">
-          <li><b id="stNow">1</b><span data-i18n="st1">مشروع قيد التنفيذ</span></li>
           <li><b>2</b><span data-i18n="st2">مجالين بتعلمهم</span></li>
-          <li><b>2022</b><span data-i18n="st3">أقدم صورة في رحلتي</span></li>
+          <li><b>2022</b><span data-i18n="st3">بداية رحلتي</span></li>
         </ul>
       </div>
       <div class="frame"><img src="assets/img/hero.webp" alt="Ahmed Mekawy" width="960" height="1280" fetchpriority="high"></div>
@@ -180,17 +159,6 @@
     <p class="about" data-i18n="aboutP"></p>
   </div></section>
 
-  <section class="s" id="journey"><div class="wrap">
-    <h2 data-i18n="jourT">رحلتي في صور</h2>
-    <div class="journey">
-      <ul class="dates" id="dates" role="tablist"></ul>
-      <figure class="stage">
-        <img id="stageImg" src="assets/img/2022-10.webp" alt="" width="1000" height="1333" loading="lazy">
-        <figcaption id="stageCap"></figcaption>
-      </figure>
-    </div>
-  </div></section>
-
   <section class="s" id="learning"><div class="wrap">
     <h2 data-i18n="learnT">اللي بتعلمه</h2>
     <ul class="cards">
@@ -198,11 +166,6 @@
       <li><h3 data-i18n="l2t"></h3><p data-i18n="l2p"></p></li>
       <li><h3 data-i18n="l3t"></h3><p data-i18n="l3p"></p></li>
     </ul>
-  </div></section>
-
-  <section class="s" id="projects"><div class="wrap">
-    <h2 data-i18n="projT">المشاريع</h2>
-    <ul class="cards" id="projectCards"></ul>
   </div></section>
 
   <section class="s" id="contact" style="border-bottom:0"><div class="wrap">
@@ -220,7 +183,6 @@
 </div>
 
 <script>
-  // Edit here. Empty values are hidden automatically.
   var CONTACT = {
     github:   "https://github.com/n8nlegacy-rgb",
     linkedin: "https://www.linkedin.com/in/ahmed-mekawy-bb5814324",
@@ -229,128 +191,45 @@
     email: ""
   };
 
-  // Journey photos. Add a caption in "en" / "ar" to show text under a photo.
-  var JOURNEY = [
-    { img: "assets/img/2022-10.webp", y: 2022, m: 10, en: "", ar: "" },
-    { img: "assets/img/2022-12.webp", y: 2022, m: 12, en: "", ar: "" },
-    { img: "assets/img/2023-07.webp", y: 2023, m: 7,  en: "", ar: "" },
-    { img: "assets/img/2025-11.webp", y: 2025, m: 11, en: "", ar: "" }
-  ];
-  var MONTHS = {
-    en: ["January","February","March","April","May","June","July","August","September","October","November","December"],
-    ar: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"]
-  };
-
-  // PROJECTS: add one object per project.
-  // status: "now" (in progress) | "plan" (planned) | "done" (finished). link is optional.
-  var PROJECTS = [
-    { status: "now",
-      ar: ["مساعد Mekaawy على واتساب", "مساعد بالذكاء الاصطناعي بيرد على رسائل العملاء على واتساب."],
-      en: ["Mekaawy WhatsApp assistant", "An AI assistant that answers customer messages on WhatsApp."], link: "" },
-    { status: "plan",
-      ar: ["تذكير بالأدوية", "تذكير على واتساب بيفكّر الشخص بميعاد دواه."],
-      en: ["Medication reminders", "A WhatsApp reminder that tells someone when to take their medicine."], link: "" },
-    { status: "plan",
-      ar: ["متابعة مخزون الصيدلية", "شيت بيتابع المخزون وينبه قبل ما المنتجات تنتهي صلاحيتها."],
-      en: ["Pharmacy stock tracker", "A sheet that tracks stock and warns before products expire."], link: "" }
-  ];
-
-  function renderProjects() {
-    var d = T[lang], ul = document.getElementById("projectCards");
-    ul.innerHTML = "";
-    PROJECTS.forEach(function (p) {
-      var li = document.createElement("li"), h = document.createElement("h3"), t = document.createElement("p"), s = document.createElement("span");
-      h.textContent = p[lang][0]; t.textContent = p[lang][1];
-      s.className = "status " + p.status; s.textContent = d[p.status];
-      li.appendChild(h); li.appendChild(t); li.appendChild(s);
-      if (p.link) {
-        var a = document.createElement("a");
-        a.className = "more"; a.href = p.link; a.target = "_blank"; a.rel = "noopener"; a.textContent = d.view;
-        li.appendChild(a);
-      }
-      ul.appendChild(li);
-    });
-    document.getElementById("stNow").textContent = PROJECTS.filter(function (p) { return p.status === "now"; }).length;
-  }
-
   var T = {
     ar: {
-      name:"أحمد مكاوي", nHome:"الرئيسية", nJour:"رحلتي", nProj:"المشاريع", nCont:"تواصل معي", nCta:"تواصل معايا",
+      name:"أحمد مكاوي", nHome:"الرئيسية", nAbout:"نبذة", nLearn:"اللي بتعلمه", nCont:"تواصل معي", nCta:"تواصل معايا",
       eyebrow:"طالب صيدلة", h1a:"أهلًا، أنا", h1b:"أحمد مكاوي",
-      lead:"طالب صيدلة بتعلم البرمجة وأتمتة الشغل بنفسي. هنا بحط المشاريع اللي بعملها وأنا بتعلم.",
-      cta1:"شوف مشاريعي", cta2:"رحلتي",
-      st1:"مشروع قيد التنفيذ", st2:"مجالين بتعلمهم", st3:"أقدم صورة في رحلتي",
+      lead:"طالب صيدلة بتعلم البرمجة وأتمتة الشغل بنفسي. هنا بحط الأفكار والمشاريع اللي بعملها وأنا بتعلم.",
+      cta1:"تواصل معايا", cta2:"اعرف عني",
+      st2:"مجالين بتعلمهم", st3:"بداية رحلتي",
       aboutT:"نبذة",
       aboutP:"أنا طالب صيدلة وبتعلم البرمجة وأتمتة العمل بنفسي. الموقع ده المكان اللي بحط فيه اللي بعمله وأنا بتعلم.",
-      jourT:"رحلتي في صور",
       learnT:"اللي بتعلمه",
       l1t:"البرمجة", l1p:"كتابة كود لحل مشاكل صغيرة وحقيقية.",
       l2t:"الأوتوميشن", l2p:"ربط التطبيقات ببعض عشان الشغل المتكرر يتعمل لوحده، منها واتساب ومساعدات الذكاء الاصطناعي.",
       l3t:"الصيدلة", l3p:"مجال دراستي الأساسي.",
-      projT:"المشاريع",
-      p1t:"مساعد Mekaawy على واتساب", p1p:"مساعد بالذكاء الاصطناعي بيرد على رسائل العملاء على واتساب.",
-      p2t:"تذكير بالأدوية", p2p:"تذكير على واتساب بيفكّر الشخص بميعاد دواه.",
-      p3t:"متابعة مخزون الصيدلية", p3p:"شيت بيتابع المخزون وينبه قبل ما المنتجات تنتهي صلاحيتها.",
-      now:"قيد التنفيذ", plan:"مخطط له", done:"خلص", view:"شوف المشروع",
       contT:"عندك فكرة أو سؤال؟", contP:"ابعتلي على أي منصة من دول وهرد عليك في أقرب وقت.",
       priv:"سياسة الخصوصية",
       cGithub:"GitHub", cLinkedin:"لينكدإن", cFacebook:"فيسبوك", cEmail:"إيميل",
-      cWa:"واتساب", copied:"اتنسخ ✓", toggle:"English", photoOf:"صورة من "
+      cWa:"واتساب", copied:"اتنسخ ✓", toggle:"English"
     },
     en: {
-      name:"Ahmed Mekawy", nHome:"Home", nJour:"Journey", nProj:"Projects", nCont:"Contact", nCta:"Get in touch",
+      name:"Ahmed Mekawy", nHome:"Home", nAbout:"About", nLearn:"Learning", nCont:"Contact", nCta:"Get in touch",
       eyebrow:"Pharmacy student", h1a:"Hi, I'm", h1b:"Ahmed Mekawy",
       lead:"A pharmacy student teaching myself programming and automation. This is where I share what I build while I learn.",
-      cta1:"See my projects", cta2:"My journey",
-      st1:"project in progress", st2:"fields I'm learning", st3:"oldest photo in my journey",
+      cta1:"Get in touch", cta2:"About me",
+      st2:"fields I'm learning", st3:"my journey started",
       aboutT:"About",
       aboutP:"I'm studying pharmacy and teaching myself programming and workflow automation. This site is where I put what I build while I learn.",
-      jourT:"My journey in photos",
       learnT:"What I'm learning",
       l1t:"Programming", l1p:"Writing code to solve small, real problems.",
       l2t:"Automation", l2p:"Connecting apps so repetitive work runs on its own, including WhatsApp and AI assistants.",
       l3t:"Pharmacy", l3p:"My main field of study.",
-      projT:"Projects",
-      p1t:"Mekaawy WhatsApp assistant", p1p:"An AI assistant that answers customer messages on WhatsApp.",
-      p2t:"Medication reminders", p2p:"A WhatsApp reminder that tells someone when to take their medicine.",
-      p3t:"Pharmacy stock tracker", p3p:"A sheet that tracks stock and warns before products expire.",
-      now:"In progress", plan:"Planned", done:"Done", view:"View project",
       contT:"Got an idea or a question?", contP:"Message me on any of these and I'll reply as soon as I can.",
       priv:"Privacy policy",
       cGithub:"GitHub", cLinkedin:"LinkedIn", cFacebook:"Facebook", cEmail:"Email",
-      cWa:"WhatsApp", copied:"Copied ✓", toggle:"العربية", photoOf:"Photo from "
+      cWa:"WhatsApp", copied:"Copied ✓", toggle:"العربية"
     }
   };
 
-  var lang = "ar", theme = "dark", sel = 0;
+  var lang = "ar", theme = "dark";
   try { lang = localStorage.getItem("lang") || "ar"; theme = localStorage.getItem("theme") || "dark"; } catch (e) {}
-
-  function dateLabel(j) { return MONTHS[lang][j.m - 1] + " " + j.y; }
-
-  function renderJourney() {
-    var ul = document.getElementById("dates");
-    ul.innerHTML = "";
-    JOURNEY.forEach(function (j, i) {
-      var li = document.createElement("li"), b = document.createElement("button");
-      b.type = "button"; b.setAttribute("role", "tab");
-      b.setAttribute("aria-selected", i === sel ? "true" : "false");
-      b.textContent = dateLabel(j);
-      b.addEventListener("click", function () { sel = i; showPhoto(true); renderJourney(); });
-      li.appendChild(b); ul.appendChild(li);
-    });
-    showPhoto(false);
-  }
-
-  function showPhoto(animate) {
-    var j = JOURNEY[sel], img = document.getElementById("stageImg");
-    function apply() {
-      img.src = j.img;
-      img.alt = T[lang].photoOf + dateLabel(j);
-      document.getElementById("stageCap").textContent = j[lang] || dateLabel(j);
-      img.classList.remove("swap");
-    }
-    if (animate) { img.classList.add("swap"); setTimeout(apply, 180); } else { apply(); }
-  }
 
   function renderContacts() {
     var d = T[lang], ul = document.getElementById("contacts"), bar = document.getElementById("socialbar");
@@ -393,8 +272,6 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = d[el.getAttribute("data-i18n")]; });
     document.getElementById("lang").textContent = d.toggle;
     applyTheme();
-    renderJourney();
-    renderProjects();
     renderContacts();
   }
 
@@ -409,9 +286,8 @@
     applyTheme();
   });
 
-  // Highlight the nav pill for the section on screen
   var links = document.querySelectorAll("#nav a");
-  var map = { home: 0, about: 0, journey: 1, learning: 2, projects: 2, contact: 3 };
+  var map = { home: 0, about: 1, learning: 2, contact: 3 };
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -420,7 +296,7 @@
         }
       });
     }, { rootMargin: "-40% 0px -55% 0px" });
-    ["home", "about", "journey", "learning", "projects", "contact"].forEach(function (id) {
+    ["home", "about", "learning", "contact"].forEach(function (id) {
       var el = document.getElementById(id); if (el) io.observe(el);
     });
   }
