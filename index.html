@@ -91,6 +91,26 @@
     .cards li{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
     .cards h3{margin:0 0 8px;font-size:20px}
     .cards p{margin:0;color:var(--muted)}
+    .status{display:inline-block;margin-top:14px;font-size:14px;font-weight:600;padding:2px 14px;border-radius:999px}
+    .status.done{border:1px solid var(--accent);color:var(--accent-text)}
+    .cards a.more{display:inline-block;margin-top:14px;font-weight:600;text-decoration:none}
+    .cards a.more:hover{text-decoration:underline}
+
+    /* CV Section Styling */
+    .cv-box{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:36px;margin-top:20px}
+    .cv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .cv-item h3{font-size:20px;margin:0 0 10px;color:var(--accent-text)}
+    .cv-item p, .cv-item ul{margin:0;color:var(--muted);padding-inline-start:20px}
+    .cv-item li{margin-bottom:8px}
+
+    /* Modal for C++ Code */
+    .modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px}
+    .modal.open{display:flex}
+    .modal-content{background:var(--card);border:1px solid var(--line);border-radius:22px;max-width:800px;width:100%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+    .modal-header{padding:16px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .modal-header h3{margin:0;font-size:20px}
+    .close-btn{background:none;border:0;color:var(--text);font-size:24px;cursor:pointer}
+    .modal-body{padding:20px;overflow-y:auto;font-family:monospace;font-size:14px;white-space:pre-wrap;background:#080809;color:#ff4d6d;direction:ltr;text-align:left}
 
     .contacts{display:flex;flex-wrap:wrap;gap:12px;margin:0;padding:0;list-style:none}
     footer{padding:30px 0 46px;color:var(--muted);font-size:15px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
@@ -114,6 +134,8 @@
     <nav class="links" id="nav">
       <a href="#home" class="active" data-i18n="nHome">الرئيسية</a>
       <a href="#about" data-i18n="nAbout">نبذة</a>
+      <a href="#cv" data-i18n="nCv">السيرة الذاتية</a>
+      <a href="#projects" data-i18n="nProj">المشاريع</a>
       <a href="#learning" data-i18n="nLearn">اللي بتعلمه</a>
       <a href="#contact" data-i18n="nCont">تواصل معي</a>
     </nav>
@@ -141,10 +163,11 @@
         <h1><span data-i18n="h1a">أهلًا، أنا</span> <em data-i18n="h1b">أحمد مكاوي</em></h1>
         <p class="lead" data-i18n="lead"></p>
         <div class="cta">
-          <a class="btn red" href="#contact" data-i18n="cta1">تواصل معايا</a>
-          <a class="btn dark" href="#about" data-i18n="cta2">اعرف عني</a>
+          <a class="btn red" href="#projects" data-i18n="cta1">مشاريعي</a>
+          <a class="btn dark" href="#contact" data-i18n="cta2">تواصل معايا</a>
         </div>
         <ul class="stats">
+          <li><b>1</b><span data-i18n="st1">مشروع برمجي</span></li>
           <li><b>2</b><span data-i18n="st2">مجالين بتعلمهم</span></li>
           <li><b>2022</b><span data-i18n="st3">بداية رحلتي</span></li>
         </ul>
@@ -157,6 +180,37 @@
   <section class="s" id="about"><div class="wrap">
     <h2 data-i18n="aboutT">نبذة</h2>
     <p class="about" data-i18n="aboutP"></p>
+  </div></section>
+
+  <!-- CV Section -->
+  <section class="s" id="cv"><div class="wrap">
+    <h2 data-i18n="cvTitle">السيرة الذاتية (CV)</h2>
+    <div class="cv-box">
+      <div class="cv-grid">
+        <div class="cv-item">
+          <h3 data-i18n="cvEduTitle">التعليم</h3>
+          <p data-i18n="cvEduDesc">بكالوريوس الصيدلة (قيد الدراسة) - التركيز على العلوم الصيدلانية وتطوير المهارات التكنولوجية بالتوازي.</p>
+        </div>
+        <div class="cv-item">
+          <h3 data-i18n="cvSkillsTitle">المهارات التقنية</h3>
+          <ul id="cvSkillsList">
+            <li data-i18n="cvSk1">أتمتة العمليات وسير العمل باستخدام n8n وAPIs.</li>
+            <li data-i18n="cvSk2">برمجة وتطوير الأساسيات باستخدام C++ ولغات الويب.</li>
+            <li data-i18n="cvSk3">دمج الذكاء الاصطناعي وبناء مساعدات تفاعلية.</li>
+          </ul>
+        </div>
+        <div class="cv-item">
+          <h3 data-i18n="cvLangTitle">اللغات</h3>
+          <p data-i18n="cvLangDesc">العربية (اللغة الأم) • الإنجليزية (جيدة، قراءة وتقنية).</p>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- Projects Section -->
+  <section class="s" id="projects"><div class="wrap">
+    <h2 data-i18n="projT">المشاريع</h2>
+    <ul class="cards" id="projectCards"></ul>
   </div></section>
 
   <section class="s" id="learning"><div class="wrap">
@@ -175,6 +229,17 @@
   </div></section>
 </main>
 
+<!-- Modal for C++ Code View -->
+<div class="modal" id="codeModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">كود لعبة اختبار الرياضيات (C++)</h3>
+      <button class="close-btn" id="closeModal">&times;</button>
+    </div>
+    <div class="modal-body" id="modalCode"></div>
+  </div>
+</div>
+
 <div class="wrap" style="border-top:1px solid var(--line)">
   <footer>
     <span>© 2026 Ahmed Mekawy</span>
@@ -191,17 +256,205 @@
     email: ""
   };
 
+  var CPP_CODE = `#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
+#include <string>
+
+using namespace std;
+
+int ReadPositiveNumber(string message, int from, int to) {
+    int number;
+    do {
+        cout << message << endl;
+        cin >> number;
+    } while (number < from || number > to);
+    return number;
+}
+
+int randomnumber(int from, int to) {
+    return rand() % (to - from + 1) + from;
+}
+
+enum enlevls { easy = 1, mid = 2, hard = 3, mix = 4 };
+enum enoptype { add = 1, reduction = 2, multiply = 3, mod = 4 };
+
+struct gameinfo {
+    int right = 0;
+    int wrong = 0;
+    int numberofquestion = 0;
+    enlevls questionlevel = enlevls::easy;
+    enoptype operationtype = enlevls::easy;
+};
+
+enlevls levelchoice() {
+    return (enlevls)ReadPositiveNumber("choice level of questions :easy = [1], mid = [2], hard = [3], mix = [4]", 1, 4);
+}
+
+gameinfo generateeasyquestion(int counter) {
+    gameinfo info;
+    int answer = 0, correctansswer = 0;
+    info.right = 0; info.wrong = 0; info.numberofquestion = counter; info.questionlevel = enlevls::easy;
+    for (int i = 1; i <= counter; i++) {
+        int rand1 = randomnumber(1, 10);
+        int rand2 = randomnumber(1, 10);
+        enoptype operation = enoptype(randomnumber(1, 4));
+        switch (operation) {
+            case (enoptype::add): cout << rand1 << " + " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 + rand2; break;
+            case (enoptype::reduction): cout << rand1 << " - " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 - rand2; break;
+            case (enoptype::mod): cout << rand1 << " / " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 / rand2; break;
+            case (enoptype::multiply): cout << rand1 << " * " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 * rand2; break;
+        }
+        if (answer == correctansswer) { system("color 2F"); cout << "you are right\\n" << endl; info.right++; }
+        else { system("color 4F"); cout << "\\a" << "the correct ansswer is " << correctansswer << endl; info.wrong++; }
+    }
+    return info;
+}
+
+gameinfo generatemidquestion(int counter) {
+    gameinfo info;
+    int answer = 0, correctansswer = 0;
+    info.right = 0; info.wrong = 0; info.numberofquestion = counter; info.questionlevel = enlevls::mid;
+    for (int i = 1; i <= counter; i++) {
+        int rand1 = randomnumber(10, 20);
+        int rand2 = randomnumber(10, 20);
+        enoptype operation = enoptype(randomnumber(1, 4));
+        switch (operation) {
+            case (enoptype::add): cout << rand1 << " + " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 + rand2; break;
+            case (enoptype::reduction): cout << rand1 << " - " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 - rand2; break;
+            case (enoptype::mod): cout << rand1 << " / " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 / rand2; break;
+            case (enoptype::multiply): cout << rand1 << " * " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 * rand2; break;
+        }
+        if (answer == correctansswer) { system("color 2F"); cout << "you are right\\n" << endl; info.right++; }
+        else { system("color 4F"); cout << "\\a" << "the correct ansswer is " << correctansswer << endl; info.wrong++; }
+    }
+    return info;
+}
+
+gameinfo generatehardquestion(int counter) {
+    gameinfo info;
+    int answer = 0, correctansswer = 0;
+    info.right = 0; info.wrong = 0; info.numberofquestion = counter; info.questionlevel = enlevls::hard;
+    for (int i = 1; i <= counter; i++) {
+        int rand1 = randomnumber(10, 50);
+        int rand2 = randomnumber(10, 50);
+        enoptype operation = enoptype(randomnumber(1, 4));
+        switch (operation) {
+            case (enoptype::add): cout << rand1 << " + " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 + rand2; break;
+            case (enoptype::reduction): cout << rand1 << " - " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 - rand2; break;
+            case (enoptype::mod): cout << rand1 << " / " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 / rand2; break;
+            case (enoptype::multiply): cout << rand1 << " * " << rand2 << "\\n-------------\\n"; cin >> answer; correctansswer = rand1 * rand2; break;
+        }
+        if (answer == correctansswer) { system("color 2F"); cout << "you are right\\n" << endl; info.right++; }
+        else { system("color 4F"); cout << "\\a" << "the correct ansswer is " << correctansswer << endl; info.wrong++; }
+    }
+    return info;
+}
+
+gameinfo generatechoicedlevel(enlevls qlevel) {
+    gameinfo info;
+    if (qlevel == easy) info = generateeasyquestion(ReadPositiveNumber("inter number of questions between 1 , 10", 1, 10));
+    else if (qlevel == mid) info = generatemidquestion(ReadPositiveNumber("inter number of questions between 1 , 10", 1, 10));
+    else if (qlevel == hard) info = generatehardquestion(ReadPositiveNumber("inter number of questions between 1 , 10", 1, 10));
+    else if (qlevel == mix) {
+        enlevls randlevel = enlevls(randomnumber(1, 3));
+        if (randlevel == easy) info = generateeasyquestion(ReadPositiveNumber("inter number of questions between 1 , 10", 1, 10));
+        else if (randlevel == mid) info = generatemidquestion(ReadPositiveNumber("inter number of questions between 1 , 10", 1, 10));
+        else if (randlevel == hard) info = generatehardquestion(ReadPositiveNumber("inter number of questions between 1 , 10", 1, 10));
+        info.questionlevel = enlevls::mix;
+    }
+    return info;
+}
+
+string getlevelname(enlevls level) {
+    switch (level) {
+        case enlevls::easy: return "easy";
+        case enlevls::mid: return "mid";
+        case enlevls::hard: return "hard";
+        case enlevls::mix: return "mix";
+        default: return "unknown";
+    }
+}
+
+void printfinalscreen(gameinfo info) {
+    float num = info.numberofquestion;
+    if (info.right >= (num / 2.0f)) cout << "****************** congratulation you passed ******************" << endl;
+    else cout << "****************** sorry you failed ******************" << endl;
+    cout << "----------------------------------------\\n";
+    cout << "number of questions is: " << info.numberofquestion << endl;
+    cout << "game level is         : " << getlevelname(info.questionlevel) << endl;
+    cout << "right answered        : " << info.right << endl;
+    cout << "wrong answered        : " << info.wrong << endl;
+    cout << "----------------------------------------\\n";
+}
+
+int main() {
+    srand((unsigned)time(NULL));
+    enlevls qlevel = levelchoice();
+    gameinfo info = generatechoicedlevel(qlevel);
+    printfinalscreen(info);
+}`;
+
+  var PROJECTS = [
+    {
+      status: "done",
+      ar: ["لعبة اختبار الرياضيات (C++)", "لعبة تفاعلية منظمة بدوال مستقلة لاختبار العمليات الحسابية بمستويات مختلفة بلغة C++."],
+      en: ["Math Quiz Game (C++)", "An interactive, well-structured math quiz game with multiple levels built in C++."],
+      action: "code"
+    }
+  ];
+
+  function renderProjects() {
+    var d = T[lang], ul = document.getElementById("projectCards");
+    ul.innerHTML = "";
+    PROJECTS.forEach(function (p) {
+      var li = document.createElement("li"), h = document.createElement("h3"), t = document.createElement("p"), s = document.createElement("span");
+      h.textContent = p[lang][0]; t.textContent = p[lang][1];
+      s.className = "status " + p.status; s.textContent = d[p.status];
+      li.appendChild(h); li.appendChild(t); li.appendChild(s);
+      
+      var btn = document.createElement("a");
+      btn.className = "more"; btn.href = "#"; btn.textContent = d.viewCode;
+      btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.getElementById("modalCode").textContent = CPP_CODE;
+        document.getElementById("codeModal").classList.add("open");
+      });
+      li.appendChild(btn);
+      ul.appendChild(li);
+    });
+  }
+
+  document.getElementById("closeModal").addEventListener("click", function() {
+    document.getElementById("codeModal").classList.remove("open");
+  });
+  document.getElementById("codeModal").addEventListener("click", function(e) {
+    if (e.target === this) this.classList.remove("open");
+  });
+
   var T = {
     ar: {
-      name:"أحمد مكاوي", nHome:"الرئيسية", nAbout:"نبذة", nLearn:"اللي بتعلمه", nCont:"تواصل معي", nCta:"تواصل معايا",
+      name:"أحمد مكاوي", nHome:"الرئيسية", nAbout:"نبذة", nCv:"السيرة الذاتية", nProj:"المشاريع", nLearn:"اللي بتعلمه", nCont:"تواصل معي", nCta:"تواصل معايا",
       eyebrow:"طالب صيدلة", h1a:"أهلًا، أنا", h1b:"أحمد مكاوي",
       lead:"طالب صيدلة بتعلم البرمجة وأتمتة الشغل بنفسي. هنا بحط الأفكار والمشاريع اللي بعملها وأنا بتعلم.",
-      cta1:"تواصل معايا", cta2:"اعرف عني",
-      st2:"مجالين بتعلمهم", st3:"بداية رحلتي",
+      cta1:"مشاريعي", cta2:"تواصل معايا",
+      st1:"مشروع برمجي", st2:"مجالين بتعلمهم", st3:"بداية رحلتي",
       aboutT:"نبذة",
       aboutP:"أنا طالب صيدلة وبتعلم البرمجة وأتمتة العمل بنفسي. الموقع ده المكان اللي بحط فيه اللي بعمله وأنا بتعلم.",
+      cvTitle:"السيرة الذاتية (CV)",
+      cvEduTitle:"التعليم",
+      cvEduDesc:"بكالوريوس الصيدلة (قيد الدراسة) - التركيز على العلوم الصيدلانية وتطوير المهارات التكنولوجية بالتوازي.",
+      cvSkillsTitle:"المهارات التقنية",
+      cvSk1:"أتمتة العمليات وسير العمل باستخدام n8n وAPIs.",
+      cvSk2:"برمجة وتطوير الأساسيات باستخدام C++ ولغات الويب.",
+      cvSk3:"دمج الذكاء الاصطناعي وبناء مساعدات تفاعلية.",
+      cvLangTitle:"اللغات",
+      cvLangDesc:"العربية (اللغة الأم) • الإنجليزية (جيدة، قراءة وتقنية).",
+      projT:"المشاريع",
+      done:"تم التنفيذ", viewCode:"عرض كود المشروع 💻",
       learnT:"اللي بتعلمه",
-      l1t:"البرمجة", l1p:"كتابة كود لحل مشاكل صغيرة وحقيقية.",
+      l1t:"البرمجة", l1p:"كتابة كود نظيف ومنظم لحل المشكلات باستخدام لغة C++.",
       l2t:"الأوتوميشن", l2p:"ربط التطبيقات ببعض عشان الشغل المتكرر يتعمل لوحده، منها واتساب ومساعدات الذكاء الاصطناعي.",
       l3t:"الصيدلة", l3p:"مجال دراستي الأساسي.",
       contT:"عندك فكرة أو سؤال؟", contP:"ابعتلي على أي منصة من دول وهرد عليك في أقرب وقت.",
@@ -210,17 +463,28 @@
       cWa:"واتساب", copied:"اتنسخ ✓", toggle:"English"
     },
     en: {
-      name:"Ahmed Mekawy", nHome:"Home", nAbout:"About", nLearn:"Learning", nCont:"Contact", nCta:"Get in touch",
+      name:"Ahmed Mekawy", nHome:"Home", nAbout:"About", nCv:"Resume", nProj:"Projects", nLearn:"Learning", nCont:"Contact", nCta:"Get in touch",
       eyebrow:"Pharmacy student", h1a:"Hi, I'm", h1b:"Ahmed Mekawy",
       lead:"A pharmacy student teaching myself programming and automation. This is where I share what I build while I learn.",
-      cta1:"Get in touch", cta2:"About me",
-      st2:"fields I'm learning", st3:"my journey started",
+      cta1:"My projects", cta2:"Get in touch",
+      st1:"coded project", st2:"fields I'm learning", st3:"my journey started",
       aboutT:"About",
       aboutP:"I'm studying pharmacy and teaching myself programming and workflow automation. This site is where I put what I build while I learn.",
+      cvTitle:"Resume / CV",
+      cvEduTitle:"Education",
+      cvEduDesc:"Pharmacy Bachelor's Student - Combining pharmaceutical sciences with self-taught technical skills.",
+      cvSkillsTitle:"Technical Skills",
+      cvSk1:"Workflow & process automation using n8n and APIs.",
+      cvSk2:"Programming fundamentals & clean code architecture using C++.",
+      cvSk3:"AI integration & building interactive assistants.",
+      cvLangTitle:"Languages",
+      cvLangDesc:"Arabic (Native) • English (Good, technical & reading).",
+      projT:"Projects",
+      done:"Done", viewCode:"View Project Code 💻",
       learnT:"What I'm learning",
-      l1t:"Programming", l1p:"Writing code to solve small, real problems.",
+      l1t:"Programming", l1p:"Writing clean, structured code to solve problems using C++.",
       l2t:"Automation", l2p:"Connecting apps so repetitive work runs on its own, including WhatsApp and AI assistants.",
-      l3t:"Pharmacy", l3p:"My main field of study.",
+      l3t:"Pharmacy", l3p:"Main field of study.",
       contT:"Got an idea or a question?", contP:"Message me on any of these and I'll reply as soon as I can.",
       priv:"Privacy policy",
       cGithub:"GitHub", cLinkedin:"LinkedIn", cFacebook:"Facebook", cEmail:"Email",
@@ -272,6 +536,7 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = d[el.getAttribute("data-i18n")]; });
     document.getElementById("lang").textContent = d.toggle;
     applyTheme();
+    renderProjects();
     renderContacts();
   }
 
@@ -287,7 +552,7 @@
   });
 
   var links = document.querySelectorAll("#nav a");
-  var map = { home: 0, about: 1, learning: 2, contact: 3 };
+  var map = { home: 0, about: 1, cv: 2, projects: 3, learning: 4, contact: 5 };
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -296,7 +561,7 @@
         }
       });
     }, { rootMargin: "-40% 0px -55% 0px" });
-    ["home", "about", "learning", "contact"].forEach(function (id) {
+    ["home", "about", "cv", "projects", "learning", "contact"].forEach(function (id) {
       var el = document.getElementById(id); if (el) io.observe(el);
     });
   }
